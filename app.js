@@ -3,6 +3,16 @@ const express = require('express');
 
 const app = express();
 
+// Je précise que les vues sont dans le dossier 'views'
+app.set('views', './views');
+
+// je préciceque nous utilison EJS pour las vues
+app.set('view engine', 'ejs');
+
+// Je pr"cise que j'utilise le dossier 'public'qui contient les fichiers statiques
+app.use(express.static('public'));
+
+
 // API ROUTE pour la racine du site : localhost:3003
 
 app.get('/', (req, res) => {
@@ -12,11 +22,21 @@ app.get('/', (req, res) => {
 });
 
 
-// API ROUTE pour la page d'accueil localhost:3003/api/acceuil
+//API ROUTE pour la page d'accueil localhost:3003/api/acceuil
 app.get('/api/acceuil', (req, res) => {
     console.log("je passe dans /api/acceuil");
+    res.render('acceuil');
 
-    // Le type d'encodage du texte retourné en réponse 
+});
+
+app.get('/api/acceuil', (req, res) => {
+    console.log("je passe dans /api/acceuil");
+    res.render('equipe');
+
+});
+
+
+    /* Le type d'encodage du texte retourné en réponse 
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
 
     // Le contenu qui sera affiché côté navigateur web
@@ -24,7 +44,7 @@ app.get('/api/acceuil', (req, res) => {
 
     // Terminer la réponse
     res.end();
-});
+}); */
 
 
 

@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/saidanrabia1-sys/MayGourmet#readme",
   "dependencies": {
+    "ejs": "^4.0.1",
     "express": "^5.2.1"
   }
 }
