@@ -39,3 +39,84 @@ DELETE FROM equipe WHERE ID = 2;
 
 -- Modifier un champ pour une ligne spécifique
 update equipe set nom = 'Alma' where id = 2;
+
+
+-- =========================================
+-- TABLE FOURNISSEUR
+-- =========================================
+
+
+
+-- Création de la table fournisseur
+CREATE TABLE fournisseur (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nom VARCHAR(150) NOT NULL,
+    ville VARCHAR(100) NOT NULL,
+    telephone VARCHAR(20) NOT NULL,
+    mail VARCHAR(100) UNIQUE,
+    adresse VARCHAR(255),
+    description VARCHAR(255)
+);
+
+SHOW TABLES;
+
+-- Ajouter 4 fournisseurs
+INSERT INTO fournisseur 
+(nom, ville, telephone, mail, adresse, description)
+VALUES
+('FreshFood', 'Paris', '0102030405', 'contact@freshfood.fr',
+ '123 Rue de la Paix', 'Fournisseur de produits frais' ),
+
+('BioMarket', 'Lyon', '0607080910', 'info@biomarket.fr',
+ '456 Avenue des Champs-Élysées', 'Fournisseur de produits biologiques'),
+
+('SaveursDuSud', 'Marseille', '0411223344', 'contact@saveursdusud.fr',
+ '789 Boulevard Sainte-Catherine', 'Fournisseur de produits du Sud de la France'),
+
+('NordFrais', 'Lille', '0320112233', 'nordfrais@mail.fr',
+ '321 Rue du Nord', 'Fournisseur de produits du Nord de la France');
+
+-- 10. Afficher les fournisseurs
+
+
+-- 11. Modifier un fournisseur
+UPDATE fournisseur
+SET nom = 'BioMarket France'
+WHERE id = 2;
+
+-- 12. Supprimer un fournisseur
+DELETE FROM fournisseur
+WHERE id = 4;
+
+-- =========================================
+-- TABLE PLAT
+-- =========================================
+
+-- 13. Création de la table plat
+CREATE TABLE IF NOT EXISTS plat (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nom VARCHAR(150) NOT NULL,
+    prix DECIMAL(6,2) NOT NULL,
+    description VARCHAR(255),
+    date_creation DATE
+) DEFAULT CHARSET=utf8mb4;
+
+-- 14. Ajouter 5 plats
+INSERT INTO plat (nom, prix, description, date_creation) VALUES
+('Poulet rôti', 12.50, 'Poulet rôti aux herbes de Provence', '2024-01-10'),
+('Lasagnes', 11.00, 'Lasagnes maison à la bolognaise', '2024-01-12'),
+('Salade César', 9.50, 'Salade César avec poulet grillé', '2024-01-15'),
+('Burger gourmet', 14.00, 'Burger au bœuf et fromage affiné', '2024-01-18'),
+('Tiramisu', 6.00, 'Dessert italien au café', '2024-01-20');
+
+-- 15. Afficher les plats
+SELECT * FROM plat;
+
+-- 16. Modifier un plat
+UPDATE plat
+SET nom = 'Burger gourmet deluxe'
+WHERE id = 4;
+
+-- 17. Supprimer un plat
+DELETE FROM plat
+WHERE id = 2;
