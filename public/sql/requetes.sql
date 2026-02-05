@@ -98,16 +98,16 @@ CREATE TABLE IF NOT EXISTS plat (
     nom VARCHAR(150) NOT NULL,
     prix DECIMAL(6,2) NOT NULL,
     description VARCHAR(255),
-    date_creation DATE
-) DEFAULT CHARSET=utf8mb4;
+);
 
 -- 14. Ajouter 5 plats
-INSERT INTO plat (nom, prix, description, date_creation) VALUES
-('Poulet rôti', 12.50, 'Poulet rôti aux herbes de Provence', '2024-01-10'),
-('Lasagnes', 11.00, 'Lasagnes maison à la bolognaise', '2024-01-12'),
-('Salade César', 9.50, 'Salade César avec poulet grillé', '2024-01-15'),
-('Burger gourmet', 14.00, 'Burger au bœuf et fromage affiné', '2024-01-18'),
-('Tiramisu', 6.00, 'Dessert italien au café', '2024-01-20');
+INSERT INTO plat (nom, prix, description,) 
+VALUES
+('Poulet rôti', 12.50, 'Poulet rôti aux herbes de Provence'),
+('Lasagnes', 11.00, 'Lasagnes maison à la bolognaise'),
+('Salade César', 9.50, 'Salade César avec poulet grillé'),
+('Burger gourmet', 14.00, 'Burger au bœuf et fromage affiné'),
+('Tiramisu', 6.00, 'Dessert italien au café');
 
 -- 15. Afficher les plats
 SELECT * FROM plat;
@@ -120,3 +120,24 @@ WHERE id = 4;
 -- 17. Supprimer un plat
 DELETE FROM plat
 WHERE id = 2;
+
+-- creation de la table produit
+
+
+CREATE TABLE produit (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nom VARCHAR(150) NOT NULL,
+    description TEXT,
+    prix DECIMAL(10,2) NOT NULL,
+    categorie VARCHAR(100),
+    disponibilite BOOLEAN DEFAULT TRUE,
+    origine VARCHAR(100),
+    type_culture VARCHAR(100),
+    id_fournisseur INT NOT NULL,
+    
+    CONSTRAINT fk_produit_fournisseur
+        FOREIGN KEY (id_fournisseur)
+        REFERENCES fournisseur(id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
