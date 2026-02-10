@@ -48,46 +48,75 @@ update equipe set nom = 'Alma' where id = 2;
 
 
 -- Création de la table fournisseur
-CREATE TABLE fournisseur (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS fournisseur (
+    id_fournisseur INT AUTO_INCREMENT PRIMARY KEY,
     nom VARCHAR(150) NOT NULL,
     ville VARCHAR(100) NOT NULL,
     telephone VARCHAR(20) NOT NULL,
     mail VARCHAR(100) UNIQUE,
     adresse VARCHAR(255),
-    description VARCHAR(255)
+    description VARCHAR(255),
+    presentation_fournisseur VARCHAR(255)
+    -- j'associe la table fournisseur a la table produit en utilisant l'ID_produit 
+    -- L'ID_produit provient de la table produit 
+
+    FOREIGN KEY (id_produit) REFERENCES produit(id_produit)
 );
 
 SHOW TABLES;
 
+-- creation de la table produit
+
+
+CREATE TABLE produit (
+    id_produit INT AUTO_INCREMENT PRIMARY KEY,
+    nom VARCHAR(150) NOT NULL,
+    description TEXT,
+    prix DECIMAL(10,2) NOT NULL,
+    categorie VARCHAR(100),
+    disponibilite BOOLEAN DEFAULT TRUE,
+    origine VARCHAR(100),
+    type_culture VARCHAR(100),
+    -- j'associe la table produit a la table fournisseur en utilisant l'ID_fournisseur les identifiants de la table fournisseur
+    id_fournisseur INT NOT NULL,
+    FOREIGN KEY (id_fournisseur) REFERENCES fournisseur(id_fournisseur)
+    
+    -- CONSTRAINT fk_produit_fournisseur
+        --FOREIGN KEY (id_fournisseur)
+        ---REFERENCES fournisseur(id_fournisseur)
+       -- ON DELETE CASCADE
+       -- ON UPDATE CASCADE*
+
+);
+
 -- Ajouter 4 fournisseurs
 INSERT INTO fournisseur 
-(nom, ville, telephone, mail, adresse, description)
+(nom, ville, telephone, mail, adresse, description, presentation_fournisseur)
 VALUES
 ('FreshFood', 'Paris', '0102030405', 'contact@freshfood.fr',
- '123 Rue de la Paix', 'Fournisseur de produits frais' ),
+ '123 Rue de la Paix', 'Fournisseur de produits frais', 'Spécialiste des produits frais de la région parisienne'),
 
 ('BioMarket', 'Lyon', '0607080910', 'info@biomarket.fr',
- '456 Avenue des Champs-Élysées', 'Fournisseur de produits biologiques'),
+ '456 Avenue des Champs-Élysées', 'Fournisseur de produits biologiques', 'Spécialiste des produits biologiques de la région lyonnaise'),
 
 ('SaveursDuSud', 'Marseille', '0411223344', 'contact@saveursdusud.fr',
- '789 Boulevard Sainte-Catherine', 'Fournisseur de produits du Sud de la France'),
+ '789 Boulevard Sainte-Catherine', 'Fournisseur de produits du Sud de la France', 'Spécialiste des produits du Sud de la France'),
 
 ('NordFrais', 'Lille', '0320112233', 'nordfrais@mail.fr',
- '321 Rue du Nord', 'Fournisseur de produits du Nord de la France');
+ '321 Rue du Nord', 'Fournisseur de produits du Nord de la France', 'Spécialiste des produits du Nord de la France');
 
 -- 10. Afficher les fournisseurs
+SELECT * FROM fournisseur;
 
 
 -- 11. Modifier un fournisseur
 UPDATE fournisseur
 SET nom = 'BioMarket France'
-WHERE id = 2;
+WHERE id_fournisseur = 2;
 
 -- 12. Supprimer un fournisseur
 DELETE FROM fournisseur
-WHERE id = 4;
-
+WHERE id_fournisseur = 4;
 -- =========================================
 -- TABLE PLAT
 -- =========================================
@@ -101,7 +130,7 @@ CREATE TABLE IF NOT EXISTS plat (
 );
 
 -- 14. Ajouter 5 plats
-INSERT INTO plat (nom, prix, description,) 
+INSERT INTO plat (nom, prix, description) 
 VALUES
 ('Poulet rôti', 12.50, 'Poulet rôti aux herbes de Provence'),
 ('Lasagnes', 11.00, 'Lasagnes maison à la bolognaise'),
@@ -121,23 +150,4 @@ WHERE id = 4;
 DELETE FROM plat
 WHERE id = 2;
 
--- creation de la table produit
 
-
-CREATE TABLE produit (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nom VARCHAR(150) NOT NULL,
-    description TEXT,
-    prix DECIMAL(10,2) NOT NULL,
-    categorie VARCHAR(100),
-    disponibilite BOOLEAN DEFAULT TRUE,
-    origine VARCHAR(100),
-    type_culture VARCHAR(100),
-    id_fournisseur INT NOT NULL,
-    
-    CONSTRAINT fk_produit_fournisseur
-        FOREIGN KEY (id_fournisseur)
-        REFERENCES fournisseur(id)
-        ON DELETE CASCADE
-        ON UPDATE CASCADE
-);
