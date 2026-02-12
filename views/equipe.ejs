@@ -1,14 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Notre équipe</title>
+    <link rel="stylesheet" href="/css/style.css">
+    
 </head>
 <body>
+
+    <h1 style="text-align:center;">Liste de l'équipe</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Poste</th>
+            <th>Mail</th>
+            <th>Téléphone</th>
+            <th>Ville</th>
+            <th>Adresse postale</th>
+            <th>Date de recrutement</th>
+            <th>Présentation</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <% resultatsEquipe.forEach(function(membre){ %>
+            
+            <tr>
+                <td><%= membre.id %></td>
+                <td><%= membre.nom %></td>
+                <td><%= membre.poste %></td>
+                <td><%= membre.mail %></td>
+                <td><%= membre.telephone %></td>
+                <td><%= membre.ville %></td>
+                <td><%= membre.adresse_postale %></td>
+                <td><%= membre.date_recrutement %></td>
+                <td><%= membre.presentation %></td>
+                
+                
+                
+            </tr>
+        <% }); %>
+    </tbody>
+</table>
+
+
     <!-- inclure le fichier navbar.ejs pour avoir la barre de navigation -->
     <%- include('navbar') -%>
 
     <h2>Mon équipe MayGourmet</h2>
+    <% resultatsEquipe.forEach((resultat)=>{ %>
+        <div class="team" src="">
+        <img src="/images/image.avif" alt="Avatar" style="width: 30%">            
+        <h3><b><%= resultat.nom %></b></h3>
+        <p><%= resultat.poste %></p>
+
+            
+        </div>
+    <% }); %>
 </body>
 </html>
