@@ -1,7 +1,23 @@
 
 const express = require('express');
+// J'importe Mysql2 utilisé interroger la BDD mysql
+const Mysql2 = require("mysql2"); 
+
+// J'importe le pilote express-myconnection utilisé pour me connecter à la BDD
+const myconnection = require("express-myconnection");
 
 const app = express();
+
+const optionsConnexionBaseDeDonnees = {
+    host: "localhost",
+    user: "root",
+    password: "Alma12.2025",
+    database:  "maygourmet",
+    port: 3306
+};
+
+// Middleware pour se connecter à la base de données MySQL
+app.use(myconnection(Mysql2, optionsConnexionBaseDeDonnees, "pool"));
 
 // Je précise que les vues sont dans le dossier 'views'
 app.set('views', './views');
@@ -29,11 +45,32 @@ app.get('/api/acceuil', (req, res) => {
 
 });
 
-app.get('/api/acceuil', (req, res) => {
-    console.log("je passe dans /api/acceuil");
-    res.render('equipe');
+app.get('/api/equipe', (req, res) => {
+    console.log("Je passe dans la route API REST /api/equipe");
 
+    req.getConnection((erreur, connection) => {
+
+        if (erreur) {
+            console.log("Erreur de connexion : ", erreur);
+            return res.status(500).send("Erreur de connexion à la base de données");
+        }
+
+        connection.query("SELECT * FROM equipe", [], (erreur, resultatsEquipe) => {
+
+            if (erreur) {
+                console.log("Erreur dans la requête SQL : ", erreur);
+                return res.status(500).send("Erreur lors de la récupération des équipes");
+            }
+
+            console.log("Mon équipe : ", resultatsEquipe);
+
+            // ON RENVOIE LES DONNÉES À LA VUE ICI
+            res.render('equipe', { resultatsEquipe });
+
+        });
+    });
 });
+
 
 
     /* Le type d'encodage du texte retourné en réponse 

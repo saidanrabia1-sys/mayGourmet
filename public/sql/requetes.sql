@@ -80,12 +80,6 @@ CREATE TABLE produit (
     -- j'associe la table produit a la table fournisseur en utilisant l'ID_fournisseur les identifiants de la table fournisseur
     id_fournisseur INT NOT NULL,
     FOREIGN KEY (id_fournisseur) REFERENCES fournisseur(id_fournisseur)
-    
-    -- CONSTRAINT fk_produit_fournisseur
-        --FOREIGN KEY (id_fournisseur)
-        ---REFERENCES fournisseur(id_fournisseur)
-       -- ON DELETE CASCADE
-       -- ON UPDATE CASCADE*
 
 );
 
