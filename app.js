@@ -8,6 +8,9 @@ const myconnection = require("express-myconnection");
 
 const app = express();
 
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+
 const optionsConnexionBaseDeDonnees = {
     host: "localhost",
     user: "root",
@@ -84,7 +87,39 @@ app.get('/api/equipe', (req, res) => {
 }); */
 
 
+// J'ajoute un fouurnisseur dans la table fournisseur. Pour cela, j'utilise la méthode POST
+app.post('/api/fournisseur', (req, res) => {
+    console.log("Je passe dans la route API REST /api/fournisseur");
+    req.getConnection((erreur, connection) => {
+        if (erreur) {
+            console.log("Erreur de connexion : ", erreur);
+            return res.status(500).send("Erreur de connexion à la base de données");
+        }
+        const nouveauFournisseur = {
+            nom: "Fournisseur 1",
+            ville: "Paris"
+        };
+        connection.query("INSERT INTO fournisseur SET ?", [nouveauFournisseur], (erreur, resultat) => {
+            if (erreur) {
+                console.log("Erreur dans la requête SQL : ", erreur);
+                return res.status(500).send("Erreur lors de l'ajout du fournisseur");
+            }
+            console.log("Fournisseur ajouté avec succès, ID : ", resultat.insertId);
+            res.status(201).send("Fournisseur ajouté avec succès");
+        });
+    });
+    });
 
+    
+    app.post('/api/fournisseur', (req, res)=> {
+      console.log("Corps de la requête : ", req.body);
+
+    });
+
+    app.get('/api/fournisseur', (req, res)=> {
+        res.render("fournisseur");
+
+    });
 
 
 
