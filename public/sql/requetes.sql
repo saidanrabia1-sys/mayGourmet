@@ -85,19 +85,23 @@ CREATE TABLE produit (
 
 -- Ajouter 4 fournisseurs
 INSERT INTO fournisseur 
-(nom, ville, telephone, mail, adresse, description, presentation_fournisseur)
+(nom, poste, mail, telephone, ville, adresse_postale, date_recrutement, presentation)
 VALUES
-('FreshFood', 'Paris', '0102030405', 'contact@freshfood.fr',
- '123 Rue de la Paix', 'Fournisseur de produits frais', 'Spécialiste des produits frais de la région parisienne'),
+('FreshFood', 'Paris', 'contact@freshfood.fr', '0102030405',
+ 'Paris', '123 Rue de la Paix', '2024-01-10',
+ 'Spécialiste des produits frais de la région parisienne'),
 
-('BioMarket', 'Lyon', '0607080910', 'info@biomarket.fr',
- '456 Avenue des Champs-Élysées', 'Fournisseur de produits biologiques', 'Spécialiste des produits biologiques de la région lyonnaise'),
+('BioMarket', 'Lyon', 'info@biomarket.fr', '0607080910',
+ 'Lyon', '456 Avenue des Champs-Élysées', '2024-02-15',
+ 'Spécialiste des produits biologiques de la région lyonnaise'),
 
-('SaveursDuSud', 'Marseille', '0411223344', 'contact@saveursdusud.fr',
- '789 Boulevard Sainte-Catherine', 'Fournisseur de produits du Sud de la France', 'Spécialiste des produits du Sud de la France'),
+('SaveursDuSud', 'Marseille', 'contact@saveursdusud.fr', '0411223344',
+ 'Marseille', '789 Boulevard Sainte-Catherine', '2024-03-01',
+ 'Spécialiste des produits du Sud de la France'),
 
-('NordFrais', 'Lille', '0320112233', 'nordfrais@mail.fr',
- '321 Rue du Nord', 'Fournisseur de produits du Nord de la France', 'Spécialiste des produits du Nord de la France');
+('NordFrais', 'Lille', 'nordfrais@mail.fr', '0320112233',
+ 'Lille', '321 Rue du Nord', '2024-04-05',
+ 'Spécialiste des produits du Nord de la France');
 
 -- 10. Afficher les fournisseurs
 SELECT * FROM fournisseur;

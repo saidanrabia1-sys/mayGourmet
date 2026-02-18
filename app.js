@@ -5,6 +5,7 @@ const Mysql2 = require("mysql2");
 
 // J'importe le pilote express-myconnection utilisé pour me connecter à la BDD
 const myconnection = require("express-myconnection");
+const connection = require('express-myconnection');
 
 const app = express();
 
@@ -110,15 +111,44 @@ app.post('/api/fournisseur', (req, res) => {
     });
     });
 
+
     
     app.post('/api/fournisseur', (req, res)=> {
-      console.log("Corps de la requête : ", req.body);
+        console.log("Corps de la requête : ", req.body);
+        const nom = req.body.nom;
+        const emailFournisseur = req.body.emailFournisseur;
+        const telephoneFournisseur = req.body.telephoneFournisseur;
+        const villeFournisseur = req.body.villeFournisseur;
+        const adressePostaleFournisseur = req.body.adressePostaleFournisseur;
+        const dateFournisseur = req.body.dateFournisseur;
+        const presentationFournisseur = req.body.presentationFournisseur;
+
+        const requeteSql = `INSERT INTO fournisseur(nom, poste, mail, telephone, ville, adresse_postale, date_recrutement, 
+        presentation)VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
+
+
+        const ordreChamps = [nomFournisseur, emailFournisseur, telephoneFournisseur, villeFournisseur,
+        adressePostaleFournisseur, dateFournisseur, presentationFournisseur];
+
 
     });
 
-    app.get('/api/fournisseur', (req, res)=> {
-        res.render("fournisseur");
+    app.post('/api/fournisseur', (req, res)=> {
+        req.getConnection((erreur, connection) => {
+              if(erreur) {
+            console.log("Erreur de connekion à la BDD : ", erreur);
+        } else {
+            connection.query(requeteSql, ordreChamps, (err,
+                nouveauFournisseur) => {
+                if(err){
+                    console.log("Erreur d'ajout fournisseur :", err);
+                }    
+                })
+        }
 
+
+        })
+      
     });
 
 
