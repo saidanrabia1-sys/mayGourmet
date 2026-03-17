@@ -172,6 +172,25 @@ app.delete('/api/equipe/:id', (req, res) => {
 });
 
 
+app.get('/contact/:id', (req, res) => {
+    const id = req.params.id;
+
+    const sql = "SELECT * FROM equipe WHERE id = ?";
+
+    connection.query(sql, [id], (err, resultat) => {
+        if (err) {
+            console.error(err);
+            return res.send("Erreur serveur");
+        }
+
+        res.render('contact', {
+            membre: resultat[0]
+        });
+    });
+});
+
+
+
 //fin du fichier. Donc ne pas coder en dessous de celui-ci
 module.exports = app;
 

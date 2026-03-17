@@ -11,20 +11,20 @@
 
     <h1 style="text-align:center;">Liste de l'équipe</h1>
 
-<table>
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nom</th>
-            <th>Poste</th>
-            <th>Mail</th>
-            <th>Téléphone</th>
-            <th>Ville</th>
-            <th>Adresse postale</th>
-            <th>Date de recrutement</th>
-            <th>Présentation</th>
-        </tr>
-    </thead>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Poste</th>
+                <th>Mail</th>
+                <th>Téléphone</th>
+                <th>Ville</th>
+                <th>Adresse postale</th>
+                <th>Date de recrutement</th>
+                <th>Présentation</th>
+            </tr>
+        </thead>
     <tbody>
 
         <% resultatsEquipe.forEach(function(membre){ %>
@@ -54,7 +54,7 @@
     <h2>Mon équipe MayGourmet</h2>
     <% resultatsEquipe.forEach((resultat)=>{ %>
     <div class="team">
-        <img src="/images/image.avif" alt="Avatar" style="width: 100px">            
+        <img src="/images/image.avif" alt="Avatar" style="width: 100px">           
         <h3><b><%= resultat.nom %></b></h3>
         <p><%= resultat.poste %></p>
     </div>
