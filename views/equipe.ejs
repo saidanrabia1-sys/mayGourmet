@@ -57,8 +57,33 @@
         <img src="/images/image.avif" alt="Avatar" style="width: 100px">           
         <h3><b><%= resultat.nom %></b></h3>
         <p><%= resultat.poste %></p>
-    </div>
-    <% }); %>
+
+        <h3><%= resultat.nom %></h3>
+            <p><%= resultat.post %></p>
+            <input type="button" value="supprimer" onclick="supprimer('<%= resultat.id %>')">
+            
+        </div>
+        <% }); %>
+
+    </body>
+        <script src="script.js"></script>
  
 </body>
+
+<script>
+    function supprimer(id) {
+        const routeComplete = '/api/equipe/'+id;
+        fetch(
+            routeComplete, {method: "DELETE"}
+        ).then(
+            (reponse) => response.json()
+        ).then(
+            (donnee) => window.location.href = donnee.routeAcceuil
+        ).catch(
+            
+            (erreur) => console.log(erreur)
+        )
+    }
+</script>
+
 </html>

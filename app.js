@@ -151,7 +151,7 @@ app.get('/api/fournisseur', (req, res) => {
 // exemple : localhoste:3003/api/equipe/1
 app.delete('/api/equipe/:id', (req, res) => {
     const idMenmbreEquipe = req.params.id;
-    const queryDelete = "SELECT FROM equipe WHERE id = ?";
+    const queryDelete = "DELETE FROM equipe WHERE id = ?";
     
     req.getConnection((erreur, connection) => {
         if(erreur) {
@@ -162,7 +162,8 @@ app.delete('/api/equipe/:id', (req, res) => {
                     console.log("Erreur requete Suppression");
                 } else {
                     console.log("Bravo! Le membre est supprimé dans la table equipe")
-                    res.status(200).redirect("/api/acceuil")             
+                    // res.status(200).redirect("/api/acceuil")
+                    res.status(200).json({ routeAcceuil: "/api/acceuil"});              
                 }
 
             })
