@@ -3,21 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact</title>
+    <title>Contact - MayGourmet</title>
     <link rel="stylesheet" href="/css/style.css">
-
 </head>
 <body>
 
-<h1>Contact du membre</h1>
+    <!-- Navbar -->
+    <%- include('navbar') -%>
 
-<p><strong>Nom :</strong> <%= membre.nom %></p>
-<p><strong>Poste :</strong> <%= membre.poste %></p>
-<p><strong>Email :</strong> <%= membre.mail %></p>
-<p><strong>Téléphone :</strong> <%= membre.telephone %></p>
-<p><strong>Ville :</strong> <%= membre.ville %></p>
+    <div class="contact-container">
+        <h1>Contactez MayGourmet</h1>
 
-<a href="/equipe">⬅ Retour</a>
+        <p>
+            Une question, une suggestion ou une demande spéciale ?
+        </p>
+
+        <form action="contact" method="POST">
+
+            <label for="nom">Nom</label>
+            <input type="text" id="nom" name="nom" placeholder="Votre nom..." required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Votre email..." required>
+
+            <label for="sujet">Sujet</label>
+            <select id="sujet" name="sujet">
+                <option value="question">Question</option>
+                <option value="commande">Commande</option>
+                <option value="partenariat">Partenariat</option>
+            </select>
+
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" placeholder="Votre message..." required></textarea>
+
+            <button type="submit">Envoyer le message</button>
+        </form>
+    </div>
 
 </body>
 </html>

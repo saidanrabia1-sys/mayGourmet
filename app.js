@@ -86,6 +86,13 @@ app.get("/api/equipe", (req, res) => {
    
 });
 
+/**
+ * API pour ajouter un membre d'équipe.
+ * Le membre sera inséré dans la table equipe
+ */
+
+
+
 // J'ajoute un fournisseur dans la table fournisseur pour cela j'utilise la méthode POST
 app.post('/api/fournisseur', (req, res) => {
     console.log("corps de la requête : ", req.body);
@@ -142,6 +149,13 @@ app.post('/api/fournisseur', (req, res) => {
 
 });
 
+app.get("/plats", (req, res) => {
+    req.getConnection((err, connection) => {
+        connection.query("SELECT * FROM plats", (err, resultatsPlats) => {
+            res.render("plats", { resultatsPlats });
+        });
+    });
+});
 
 app.get('/api/fournisseur', (req, res) => {
     res.render('fournisseur');
@@ -172,25 +186,32 @@ app.delete('/api/equipe/:id', (req, res) => {
 
 });
 
+app.get("/contact", (req, res) => {
+    console.log("Je passe dans /contact");
 
-app.get('/contact/:id', (req, res) => {
-    const id = req.params.id;
+    // Connexion à la BDD
+    req.getConnection((erreur, connection) => {
 
-    const sql = "SELECT * FROM equipe WHERE id = ?";
-
-    connection.query(sql, [id], (err, resultat) => {
-        if (err) {
-            console.error(err);
-            return res.send("Erreur serveur");
+        if (erreur) {
+            console.log(erreur);
+            return res.status(500).send("Erreur de connexion à la base de données");
         }
 
-        res.render('contact', {
-            membre: resultat[0]
+        // Exemple : récupérer les infos de contact (ou équipe)
+        connection.query("SELECT * FROM equipe", [], (err, resultatsContact) => {
+
+            if (err) {
+                console.log("Erreur dans la requête SQL SELECT");
+                return res.status(500).send("Erreur serveur");
+            }
+
+            console.log("Contacts :", resultatsContact);
+
+            // Envoi vers la vue contact.ejs
+            res.render("contact", { resultatsContact });
         });
     });
 });
-
-
 
 //fin du fichier. Donc ne pas coder en dessous de celui-ci
 module.exports = app;

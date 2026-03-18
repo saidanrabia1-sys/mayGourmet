@@ -1,0 +1,46 @@
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100px;
+  height: 100px;
+  padding: 50px;
+  margin: 10px auto;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+  margin: 10% auto;
+  width: 400px;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Header */
+.modal-header {
+  padding: 9px;
+  background:mediumvioletred;
+  color: yellowgreen;
+}
+
+/* Body */
+.modal-body {
+  padding: 20px;
+}
+
+/* Footer */
+.modal-footer {
+  padding: 8px;
+  background:thistle;
+  text-align: center;
+}
+
+/* Bouton fermer */
+.close {
+  float: right;
+  cursor: pointer;
+  font-size: 20px;
+}

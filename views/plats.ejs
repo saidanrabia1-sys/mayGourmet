@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes plats</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <%- include('navbar') -%>
+
+    <div class="container">
+
+        <h2>Ajouter un plat</h2>
+
+        <form action="/api/plats" method="POST">
+
+            <label>Nom du plat</label>
+            <input type="text" name="nom" placeholder="Ex: Poulet coco" required>
+
+            <label>Prix (€)</label>
+            <input type="number" name="prix" step="0.01" required>
+
+            <label>Description</label>
+            <textarea name="description" placeholder="Description du plat..." required></textarea>
+
+            <button type="submit">Ajouter</button>
+
+        </form>
+
+        <hr>
+
+        <h2>Liste des plats</h2>
+
+        <% if (resultatsPlats && resultatsPlats.length > 0) { %>
+            <% resultatsPlats.forEach((plat) => { %>
+
+                <div class="plat-card">
+                    <h3><%= plat.nom %></h3>
+                    <p><strong>Prix :</strong> <%= plat.prix %> €</p>
+                    <p><%= plat.description %></p>
+
+                    <button onclick="supprimer('<%= plat.id %>')">Supprimer</button>
+                </div>
+
+            <% }); %>
+        <% } else { %>
+            <p>Aucun plat disponible.</p>
+        <% } %>
+
+    </div>
+
+    <script>
+    function supprimer(id) {
+        if (confirm("Supprimer ce plat ?")) {
+            fetch('/api/plats/' + id, { method: "DELETE" })
+                .then(res => res.json())
+                .then(() => window.location.reload())
+                .catch(err => console.log(err));
+        }
+    }
+    </script>
+
+</body>
+</html>

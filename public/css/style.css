@@ -1,13 +1,13 @@
 body {
-    background-color:turquoise;
+    background-color: lightpink;
 
         table {
         border: 1px solid black;
-        width: 30px;
-        margin: 20px auto;
-        padding: 10px;
+        width: 20px;
+        margin: 15px auto;
+        padding: 15px ;
         background-color: white;
-        border-radius: 8px;
+        border-radius: 5px;
         };
         
         td {
@@ -15,7 +15,8 @@ body {
             padding: 10px;
             text-align: left;
             background-color: tan;
-            margin: 20px auto;
+            margin: 10px;
+           
         };
 
         th {
@@ -46,8 +47,4 @@ h2 {
 .container {
   padding: 2px 16px;
 }
-
-
-
-
 
