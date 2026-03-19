@@ -18,12 +18,23 @@
 
 <ul>
     <% plats.forEach(plat => { %>
-        <li>
-            <h3><%= plat.nom %> - <%= plat.prix %>€</h3>
-            <p><%= plat.description %></p>
-        </li>
+    <li class="plat-card">
+        <img src="/images/<%= plat.image || 'default.jpg' %>" class="image-plat">
+
+        <% if (plat.image2) { %>
+        <img src="/images/<%= plat.image2 %>" class="image-plat">
+        <% } %>
+
+        <% if (plat.image3) { %>
+        <img src="/images/<%= plat.image3 %>" class="image-plat">
+        <% } %>
+
+        <h3><%= plat.nom %> - <%= plat.prix %>€</h3>
+        <p><%= plat.description %></p>
+    </li>
     <% }) %>
 </ul>
+
 
 </body>
 </html>
