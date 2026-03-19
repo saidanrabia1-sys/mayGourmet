@@ -48,3 +48,17 @@ h2 {
   padding: 2px 16px;
 }
 
+nav {
+    background: #a49a9a;
+    padding: 15px;
+}
+
+nav a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: #e67e22;
+}

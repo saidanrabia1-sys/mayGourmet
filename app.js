@@ -149,10 +149,23 @@ app.post('/api/fournisseur', (req, res) => {
 
 });
 
-app.get("/plats", (req, res) => {
+app.get('/api/plats', (req, res) => {
     req.getConnection((err, connection) => {
-        connection.query("SELECT * FROM plats", (err, resultatsPlats) => {
-            res.render("plats", { resultatsPlats });
+        if (err) {
+            console.log(err);
+            return res.send("Erreur DB");
+        }
+
+        connection.query("SELECT * FROM plats", [], (err, results) => {
+            if (err) {
+                console.log(err);
+                return res.send("Erreur SQL");
+            }
+
+            console.log("Résultats :", results); // IMPORTANT
+
+            res.render('plats', { plats: results });
+            console.log(results);
         });
     });
 });
@@ -186,7 +199,7 @@ app.delete('/api/equipe/:id', (req, res) => {
 
 });
 
-app.get("/contact", (req, res) => {
+app.get("/api/contact", (req, res) => {
     console.log("Je passe dans /contact");
 
     // Connexion à la BDD
@@ -212,6 +225,7 @@ app.get("/contact", (req, res) => {
         });
     });
 });
+
 
 //fin du fichier. Donc ne pas coder en dessous de celui-ci
 module.exports = app;
