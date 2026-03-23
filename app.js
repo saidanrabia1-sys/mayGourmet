@@ -91,10 +91,12 @@ app.get("/api/equipe", (req, res) => {
  * Le membre sera inséré dans la table equipe
  */
 
-
+app.put('api/equipe/:id', (req, res) => {
+    // Je détaille la manière dont je vais modifier les données
+});
 
 // J'ajoute un fournisseur dans la table fournisseur pour cela j'utilise la méthode POST
-app.post('/api/fournisseur', (req, res) => {
+/* app.post('/api/fournisseur', (req, res) => {
     console.log("corps de la requête : ", req.body);
 
     console.log(req.body.nom);
@@ -147,7 +149,7 @@ app.post('/api/fournisseur', (req, res) => {
     });
     
 
-});
+}); */
 
 app.get('/api/plats', (req, res) => {
     req.getConnection((err, connection) => {

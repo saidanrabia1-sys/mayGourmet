@@ -130,6 +130,10 @@
             <button onclick="confirmerSuppression()">Oui</button>
             <button onclick="fermerModal()">Annuler</button>
 
+            <input type="button" value="modifier" onclick="modifier('<%= resultat.id %>', '<%=  resultat.nom %>', '<%= resultat.prenom %>',
+            '<%= resultat.Mail%>','<%= resultat.telephone %>','<%= resultat.poste %>','<%= resultat.adresse_postale %>','<%= resultat.date_recrutement%>')">
+         
+
         </div>
         <% }); %>
         
