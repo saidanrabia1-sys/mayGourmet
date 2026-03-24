@@ -93,7 +93,9 @@ app.get("/api/equipe", (req, res) => {
 
 app.put('api/equipe/:id', (req, res) => {
     // Je détaille la manière dont je vais modifier les données
+
 });
+
 
 // J'ajoute un fournisseur dans la table fournisseur pour cela j'utilise la méthode POST
 /* app.post('/api/fournisseur', (req, res) => {
